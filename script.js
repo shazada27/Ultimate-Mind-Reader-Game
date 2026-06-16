@@ -101,12 +101,22 @@ function showScreen(screenId) {
 
 // Welcome Screen Setup
 function startApp() {
+    console.log("startApp() called");
     const nameInput = document.getElementById('player-name-input');
+    if (!nameInput) {
+        console.error("Critical: 'player-name-input' not found in DOM");
+        return;
+    }
     let name = nameInput.value.trim();
     if (!name) return;
     
     playerState.name = name.toUpperCase();
-    document.getElementById('player-name-display').innerText = playerState.name;
+    console.log("Player name initialized:", playerState.name);
+    
+    const displayElement = document.getElementById('player-name-display');
+    if (displayElement) {
+        displayElement.innerText = playerState.name;
+    }
     
     // Load local history
     loadHistoryData();
@@ -362,8 +372,14 @@ function resetZodiacForm() {
 
 // History Management
 function loadHistoryData() {
-    const historyJson = localStorage.getItem(`mind_reader_history_${playerState.name}`);
-    playerState.history = historyJson ? JSON.parse(historyJson) : [];
+    try {
+        const historyJson = localStorage.getItem(`mind_reader_history_${playerState.name}`);
+        playerState.history = historyJson ? JSON.parse(historyJson) : [];
+        console.log("History loaded successfully:", playerState.history);
+    } catch (e) {
+        console.warn("Failed to read history from localStorage. Defaulting to empty array.", e);
+        playerState.history = [];
+    }
 }
 
 function saveHistoryItem(modeName, resultValue) {
@@ -380,7 +396,12 @@ function saveHistoryItem(modeName, resultValue) {
         playerState.history.pop();
     }
     
-    localStorage.setItem(`mind_reader_history_${playerState.name}`, JSON.stringify(playerState.history));
+    try {
+        localStorage.setItem(`mind_reader_history_${playerState.name}`, JSON.stringify(playerState.history));
+        console.log("History saved successfully.");
+    } catch (e) {
+        console.warn("Failed to save history to localStorage:", e);
+    }
 }
 
 function loadHistory() {
@@ -438,10 +459,15 @@ function triggerConfetti() {
     }
 }
 
-// Attach Event Listeners on Load
-window.addEventListener('DOMContentLoaded', () => {
-    // Hook up zodiac date select options on select month change
-    document.getElementById('zodiac-month').addEventListener('change', updateZodiacDays);
+// Attach Event Listeners on Load (Robust check for readyState)
+function initializeApp() {
+    console.log("initializeApp() running");
+    const zodiacMonth = document.getElementById('zodiac-month');
+    if (zodiacMonth) {
+        zodiacMonth.addEventListener('change', updateZodiacDays);
+    } else {
+        console.warn("Element 'zodiac-month' not found during initialization");
+    }
     
     // Add mouse move glow effect listener to Mode Cards (Premium dynamic effect)
     document.addEventListener('mousemove', (e) => {
@@ -454,4 +480,10 @@ window.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--y', `${y}px`);
         });
     });
-});
+}
+
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}
