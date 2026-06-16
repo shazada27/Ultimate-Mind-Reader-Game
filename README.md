@@ -1,41 +1,69 @@
-Ultimate Mind Reader - C++ OOP Project
+# Ultimate Mind Reader - Magical Binary Experience
 
-📌 Project Overview
-The "Ultimate Mind Reader" is a feature-rich, console-based interactive game developed entirely in C++. Utilizing Object-Oriented Programming (OOP) principles and bitwise operations, the program effectively "reads the user's mind" by deducing their chosen numbers, letters, or dates through a series of logical card-based questions. 
+📌 **Live Web Version**: [Play Ultimate Mind Reader Online](https://shazada27.github.io/Ultimate-Mind-Reader-Game/)
 
-This project demonstrates strong foundational knowledge in algorithmic logic, exception handling, and interactive console UI design.
+---
 
-🚀 Key Features
-*   Multiple Game Modes: The game can guess numbers (1-100), alphabets (A-Z), ages, birth dates, birth months, and the first letter of a user's crush.
-*   Bitwise Guessing Algorithm: Uses binary logic and bit manipulation (`num & (1 << i)`) to accurately deduce user choices in minimal attempts.
-*   Zodiac Sign Calculator: Includes a dedicated feature to calculate a user's astrological sign based on their birth date and month inputs.
-*   Mystery Mode: A randomized gameplay mode that selects a surprise category for the user.
-*   Data Logging (History): Automatically records the player's name, game mode, and results with timestamps into a `results.txt` file for persistent history tracking.
-*   Robust Exception Handling: Implements custom exception classes (`InputException`) to handle invalid inputs, empty strings, and out-of-bounds numbers gracefully without crashing.
-*   Dynamic Console UI: Features colored text output, delayed "slow print" effects, and formatted grid displays for an engaging user experience.
+## 📌 Project Overview
+The **Ultimate Mind Reader** is a feature-rich, interactive game utilizing bitwise operations and binary search logic to "read the user's mind." It deduces the user's chosen numbers, letters, or dates through a series of interactive, card-based questions.
 
- 💻 Technical Stack
-*   Language: C++ (Standard Library)
-*   Core Concepts Used: 
-    *   Object-Oriented Programming (Classes, Encapsulation)
-    *   Bitwise Operators & Binary Search Logic
-    *   File Handling (`<fstream>`)
-    *   Exception Handling (`try-catch` blocks)
-    *   Time & Threading (`<chrono>`, `<thread>`)
+Originally developed as a C++ console application, this repository has been upgraded to feature a **premium, responsive web-based version** using modern HTML5, CSS3, and JavaScript, while keeping the original C++ project intact.
 
-🛠️ How to Run
-1. Clone this repository to your local machine.
-2. Compile the source code using any standard C++ compiler (e.g., g++, MSVC).
-```bash
+---
+
+## 🚀 Key Features
+*   **Multiple Game Modes**: Guess numbers (1-100), alphabets (A-Z), ages, birth dates, birth months, or the first letter of a user's crush.
+*   **Bitwise Guessing Algorithm**: Uses binary logic and bit manipulation (`num & (1 << i)`) to accurately deduce user choices in minimal steps.
+*   **Zodiac Sign Calculator**: Calculates the user's astrological sign based on birth date and month inputs.
+*   **Mystery Mode**: A randomized gameplay mode that selects a surprise category.
+*   **Last Guesses History**: Automatically records the player's name, game mode, and results with timestamps, saved locally in `localStorage` (web) and `results.txt` (C++ console).
+*   **Premium Web UI**: Features a modern cosmic dark theme with glassmorphism, glowing accents, pulsing components, scanner animations, suspenseful loading delays, and celebratory confetti.
+*   **Fully Responsive**: Optimised for mobile, tablet, and desktop viewports.
+
+---
+
+## 💻 Technical Stack
+
+### Web Version (Frontend SPA)
+*   **Structure**: Semantic HTML5
+*   **Styling**: Modern CSS3 (Variables, flexbox/grid layout, custom animations, keyframe glow effects)
+*   **Logic**: Vanilla JavaScript ES6 (Bitwise logic, dynamic DOM generation, LocalStorage history, state controllers)
+
+### Console Version (C++)
+*   **Core Concepts**: Object-Oriented Programming (Classes, Encapsulation)
+*   **File Handling**: `<fstream>` for output logs
+*   **Robust Exception Handling**: Custom `InputException` handling
+*   **Threading**: `<chrono>` & `<thread>` for animated slow prints
+
+---
+
+## 🛠️ How to Play & Run
+
+### 🌐 Play the Web Version (GitHub Pages)
+Simply open the live URL in your web browser:
+👉 **[https://shazada27.github.io/Ultimate-Mind-Reader-Game/](https://shazada27.github.io/Ultimate-Mind-Reader-Game/)**
+
+### 🖥️ Run the Web Version Locally
+1. Clone this repository.
+2. Open `index.html` directly in any web browser, or host it using a local development server (e.g., Live Server in VS Code).
+
+### ⌨️ Run the C++ Console Version
+1. Compile the source code using any standard C++ compiler:
+   ```bash
    g++ Mind_Reader_Game.cpp -o MindReader
-
-   MindReader.exe
+   ```
+2. Run the executable:
+   * **Windows**:
+     ```bash
+     MindReader.exe
      ```
-* **Mac/Linux:**
-```bash
+   * **Mac/Linux**:
+     ```bash
      ./MindReader
      ```
 
+---
+
 ## 👤 Author
-* Developed By:  Muhammad Ahmad
-* Designed as a showcase of C++ OOP and algorithmic problem-solving skills.
+*   **Developed By**: Muhammad Ahmad
+*   **Portfolio Showcase**: Designed as a demonstration of C++ OOP, binary logic, and modern responsive web design.

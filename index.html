@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ultimate Mind Reader Game - A premium, interactive web-based mind reading experience utilizing bitwise card math. Guess numbers, alphabets, ages, birth months, or your crush's initial.">
+    <title>Ultimate Mind Reader - Magical Binary Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Magic Elements -->
+    <div class="stars-bg"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="main-title"><i class="fa-solid fa-wand-magic-sparkles magic-icon"></i> MIND READER</h1>
+            <p class="subtitle">Experience the magic of binary mathematical sorcery</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Screen 1: Welcome Screen -->
+            <section id="screen-welcome" class="game-screen active">
+                <div class="glass-card welcome-card">
+                    <div class="card-icon-header">
+                        <i class="fa-solid fa-brain brain-pulsate"></i>
+                    </div>
+                    <h2>Enter the Realm</h2>
+                    <p class="card-desc">Prepare to have your mind read. Introduce yourself to start the magic.</p>
+                    
+                    <form id="welcome-form" onsubmit="event.preventDefault(); startApp();">
+                        <div class="input-group">
+                            <label for="player-name-input">What shall I call you?</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user input-icon"></i>
+                                <input type="text" id="player-name-input" placeholder="ENTER YOUR NAME" autocomplete="off" required maxlength="30">
+                            </div>
+                        </div>
+                        <button type="submit" id="btn-enter" class="btn btn-primary btn-glow">
+                            <span>Begin Adventure</span> <i class="fa-solid fa-arrow-right-long"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Screen 2: Dashboard Screen -->
+            <section id="screen-dashboard" class="game-screen">
+                <div class="dashboard-header">
+                    <div class="player-welcome">
+                        <span class="welcome-label">Welcome, Wizard</span>
+                        <h2 id="player-name-display">ANONYMOUS</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button id="btn-show-history" class="btn btn-icon-text" onclick="showScreen('screen-history'); loadHistory();">
+                            <i class="fa-solid fa-history"></i> <span>History</span>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="dashboard-intro">Choose a magical game mode, and let me guess what you are thinking of!</p>
+
+                <!-- Game Modes Grid -->
+                <div class="modes-grid">
+                    <div class="mode-card" onclick="launchGame('number')">
+                        <div class="mode-icon num-theme"><i class="fa-solid fa-hashtag"></i></div>
+                        <h3>Number Guesser</h3>
+                        <p>Pick a number between 1 and 100. I'll guess it in 7 steps!</p>
+                        <span class="mode-tag">1-100</span>
+                    </div>
+
+                    <div class="mode-card" onclick="launchGame('alphabet')">
+                        <div class="mode-icon alpha-theme"><i class="fa-solid fa-font"></i></div>
+                        <h3>Alphabet Guesser</h3>
+                        <p>Think of any letter from A to Z. I'll read your mind in 5 cards.</p>
+                        <span class="mode-tag">A-Z</span>
+                    </div>
+
+                    <div class="mode-card" onclick="launchGame('age')">
+                        <div class="mode-icon age-theme"><i class="fa-solid fa-cake-candles"></i></div>
+                        <h3>Age Guesser</h3>
+                        <p>Let me guess your age (or anyone's age) from 1 to 100.</p>
+                        <span class="mode-tag">Age</span>
+                    </div>
+
+                    <div class="mode-card" onclick="launchGame('birthday')">
+                        <div class="mode-icon bday-theme"><i class="fa-solid fa-calendar-day"></i></div>
+                        <h3>Birthday Date</h3>
+                        <p>Focus on your birth day date (1-31). I'll find it in 5 steps.</p>
+                        <span class="mode-tag">1-31</span>
+                    </div>
+
+                    <div class="mode-card" onclick="launchGame('month')">
+                        <div class="mode-icon month-theme"><i class="fa-solid fa-calendar-days"></i></div>
+                        <h3>Birth Month</h3>
+                        <p>Focus on your birth month. I will reveal it in only 4 steps.</p>
+                        <span class="mode-tag">1-12</span>
+                    </div>
+
+                    <div class="mode-card" onclick="launchGame('crush')">
+                        <div class="mode-icon crush-theme"><i class="fa-solid fa-heart"></i></div>
+                        <h3>Crush Initial</h3>
+                        <p>Secretly pick the first letter of your crush's name. Let me unveil it!</p>
+                        <span class="mode-tag">Love</span>
+                    </div>
+                </div>
+
+                <!-- Auxiliary Modes Grid -->
+                <div class="auxiliary-grid">
+                    <div class="aux-card zodiac-card" onclick="showScreen('screen-zodiac')">
+                        <div class="aux-content">
+                            <i class="fa-solid fa-dharmachakra aux-icon"></i>
+                            <div>
+                                <h3>Zodiac Sign Calculator</h3>
+                                <p>Find out your Zodiac Sign using your birth date & month.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+
+                    <div class="aux-card mystery-card" onclick="launchMysteryMode()">
+                        <div class="aux-content">
+                            <i class="fa-solid fa-question-circle aux-icon"></i>
+                            <div>
+                                <h3>Mystery Mode</h3>
+                                <p>Let fate decide! Play a randomly chosen game mode.</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 3: Game Board Screen -->
+            <section id="screen-game" class="game-screen">
+                <div class="glass-card game-board-card">
+                    <!-- Progress and Navigation -->
+                    <div class="game-progress-wrapper">
+                        <button class="btn-back-dashboard" onclick="abortGame()" title="Quit Game">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                        <div class="progress-details">
+                            <span id="game-mode-title">Number Guesser</span>
+                            <span id="card-progress-text">Card 1 of 7</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="game-progress-bar" class="progress-bar-fill" style="width: 14%;"></div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="game-instructions">
+                        <p id="game-instruction-text">Is your chosen number in the card below?</p>
+                    </div>
+
+                    <!-- Number Grid / Character Board on the Card -->
+                    <div class="card-display-container">
+                        <div class="magical-card-outer">
+                            <div class="magical-card-inner">
+                                <div class="card-scanline"></div>
+                                <div id="card-items-grid" class="items-grid">
+                                    <!-- Items generated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="game-actions">
+                        <button id="btn-no" class="btn btn-secondary btn-half" onclick="submitCardAnswer(false)">
+                            <i class="fa-solid fa-xmark"></i> <span>No, Not Here</span>
+                        </button>
+                        <button id="btn-yes" class="btn btn-primary btn-half btn-glow" onclick="submitCardAnswer(true)">
+                            <i class="fa-solid fa-check"></i> <span>Yes, It's Here</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 4: Mind Reading Loader Screen -->
+            <section id="screen-loader" class="game-screen">
+                <div class="loader-content">
+                    <div class="crystal-ball-container">
+                        <div class="crystal-ball">
+                            <div class="energy-waves"></div>
+                            <div class="energy-waves delayed"></div>
+                            <i class="fa-solid fa-brain loading-brain"></i>
+                        </div>
+                        <div class="pedestal"></div>
+                    </div>
+                    <h2 id="loader-status-text">Connecting to your thoughts...</h2>
+                    <div class="scanner-line-wrapper">
+                        <div class="scanner-line"></div>
+                    </div>
+                    <p class="loader-sub">Focus on your choice and keep it in mind...</p>
+                </div>
+            </section>
+
+            <!-- Screen 5: Result Screen -->
+            <section id="screen-result" class="game-screen">
+                <div id="confetti-container"></div>
+                <div class="glass-card result-card">
+                    <div class="result-glow-ring"></div>
+                    <div class="result-header">
+                        <i class="fa-solid fa-sparkles spark-left"></i>
+                        <h2>Mind Read Complete!</h2>
+                        <i class="fa-solid fa-sparkles spark-right"></i>
+                    </div>
+
+                    <p class="result-intro" id="result-intro-text">After analyzing your selections, my calculations reveal:</p>
+
+                    <!-- Large Result Display -->
+                    <div class="result-display-wrapper">
+                        <div class="result-display-card">
+                            <div id="result-value-display">77</div>
+                            <div id="result-icon-display"><i class="fa-solid fa-hashtag"></i></div>
+                        </div>
+                    </div>
+
+                    <p id="result-message" class="result-comment">I knew it! Math never lies. 😊</p>
+
+                    <div class="result-actions">
+                        <button class="btn btn-secondary" onclick="showScreen('screen-dashboard')">
+                            <i class="fa-solid fa-house"></i> <span>Dashboard</span>
+                        </button>
+                        <button id="btn-play-again" class="btn btn-primary btn-glow" onclick="replayCurrentMode()">
+                            <i class="fa-solid fa-rotate-left"></i> <span>Play Again</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 6: Zodiac Screen -->
+            <section id="screen-zodiac" class="game-screen">
+                <div class="glass-card zodiac-calc-card">
+                    <div class="zodiac-header">
+                        <button class="btn-back-dashboard" onclick="showScreen('screen-dashboard')" title="Back to Dashboard">
+                            <i class="fa-solid fa-circle-chevron-left"></i>
+                        </button>
+                        <h2>Zodiac Sign Calculator</h2>
+                    </div>
+                    <p class="zodiac-intro">Select your date and month of birth to calculate your astrological sign.</p>
+
+                    <form id="zodiac-form" onsubmit="event.preventDefault(); calculateZodiac();">
+                        <div class="form-row">
+                            <div class="input-group half-group">
+                                <label for="zodiac-month">Birth Month</label>
+                                <select id="zodiac-month" required>
+                                    <option value="" disabled selected>Select Month</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group half-group">
+                                <label for="zodiac-day">Birth Day</label>
+                                <select id="zodiac-day" required>
+                                    <option value="" disabled selected>Select Day</option>
+                                    <!-- Options generated dynamically based on month -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-glow full-btn">
+                            <span>Reveal Zodiac Sign</span> <i class="fa-solid fa-sun-plant-wilt"></i>
+                        </button>
+                    </form>
+
+                    <!-- Zodiac Result Display (Hidden initially) -->
+                    <div id="zodiac-result-wrapper" class="zodiac-result-box hidden">
+                        <div class="zodiac-decor"></div>
+                        <h3 id="zodiac-sign-name">♎ Libra</h3>
+                        <p id="zodiac-sign-desc">A sign of balance, harmony, and connection.</p>
+                        <button class="btn btn-secondary btn-sm" onclick="resetZodiacForm()">Calculate Another</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 7: History Screen -->
+            <section id="screen-history" class="game-screen">
+                <div class="glass-card history-card">
+                    <div class="history-header">
+                        <button class="btn-back-dashboard" onclick="showScreen('screen-dashboard')" title="Back to Dashboard">
+                            <i class="fa-solid fa-circle-chevron-left"></i>
+                        </button>
+                        <h2>Last Guesses History</h2>
+                    </div>
+                    <p class="history-intro">Here is a record of the secrets I've uncovered from your mind in this session.</p>
+
+                    <div class="history-table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>Result</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-rows">
+                                <!-- Generated Dynamically -->
+                            </tbody>
+                        </table>
+                        <div id="history-empty" class="history-empty-state">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>No history found yet. Play a game to record your guesses!</p>
+                        </div>
+                    </div>
+
+                    <div class="history-actions">
+                        <button class="btn btn-danger btn-sm" onclick="clearAllHistory()">
+                            <i class="fa-solid fa-trash-can"></i> Clear History
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Ultimate Mind Reader &copy; 2026. Powered by Binary Math.</p>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
