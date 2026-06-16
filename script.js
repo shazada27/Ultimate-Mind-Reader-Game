@@ -83,7 +83,7 @@ const ZODIAC_SIGNS = [
     { startMonth: 9, startDay: 23, endMonth: 10, endDay: 22, name: "♎ Libra", desc: "Cooperative, diplomatic, gracious, and fair-minded." },
     { startMonth: 10, startDay: 23, endMonth: 11, endDay: 21, name: "♏ Scorpio", desc: "Passionate, stubborn, resourceful, and brave." },
     { startMonth: 11, startDay: 22, endMonth: 12, endDay: 21, name: "♐ Sagittarius", desc: "Generous, idealistic, and great sense of humor." },
-    { startMonth: 12, startDay: 22, endMonth: 12, 31, name: "♑ Capricorn", desc: "Responsible, disciplined, self-controlled, and good managers." },
+    { startMonth: 12, startDay: 22, endMonth: 12, endDay: 31, name: "♑ Capricorn", desc: "Responsible, disciplined, self-controlled, and good managers." },
     { startMonth: 12, startDay: 1, endMonth: 1, endDay: 19, name: "♑ Capricorn", desc: "Responsible, disciplined, self-controlled, and good managers." } // Capricorn wraps into January
 ];
 
